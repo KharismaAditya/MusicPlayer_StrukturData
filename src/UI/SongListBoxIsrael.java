@@ -15,6 +15,7 @@ public class SongListBoxIsrael {
     private final mainMenu player;
     Playlist playlist;
     MediaPlayer mediaPlayer;
+    private GridPane grid; // simpan referensi grid
 
     public SongListBoxIsrael(mainMenu player, Playlist playlist, MediaPlayer mediaPlayer) {
         this.player = player;
@@ -23,9 +24,20 @@ public class SongListBoxIsrael {
     }
 
     public GridPane songList(){
-        GridPane grid = new GridPane();
+        grid = new GridPane();
         grid.setHgap(10);
         grid.setVgap(20);
+
+        populateGrid(); // pisahkan logika pengisian ke method sendiri
+
+        grid.setMinSize(550,240);
+        grid.setPadding(new Insets(10));
+        return grid;
+    }
+
+    // Method baru: isi grid dengan lagu dari playlist
+    private void populateGrid() {
+        grid.getChildren().clear(); // bersihkan dulu sebelum diisi ulang
 
         int columns = 4;
         int index = 0;
@@ -33,7 +45,6 @@ public class SongListBoxIsrael {
         SongNode current = playlist.getHead();
 
         while(current != null){
-
             HBox item = songItem(playlist, current);
 
             int col = index % columns;
@@ -44,9 +55,11 @@ public class SongListBoxIsrael {
             current = current.getNext();
             index++;
         }
-        grid.setMinSize(550,240);
-        grid.setPadding(new Insets(10));
-        return grid;
+    }
+
+    // Method baru: dipanggil dari luar ketika ada lagu baru ditambahkan
+    public void refreshSongList() {
+        populateGrid();
     }
 
     public HBox songItem(Playlist playlist, SongNode node){
@@ -61,7 +74,7 @@ public class SongListBoxIsrael {
         songTitle.getChildren().add(songTitleLabel);
 
         VBox playSongBox = new VBox();
-        playSongBox.setMinSize(30,30);playSongBox.setAlignment(Pos.CENTER);
+        playSongBox.setMinSize(30,30); playSongBox.setAlignment(Pos.CENTER);
         playSongBox.setStyle("-fx-background-color: #FFFFFF");
         Button playButton = playSong();
 
@@ -72,12 +85,7 @@ public class SongListBoxIsrael {
 
         playSongBox.getChildren().add(playButton);
 
-        playButton.setOnAction(e -> {
-            playlist.setCurrent(node);
-            player.playSong(node.getSongPath());
-        });
-
-        songItem.getChildren().addAll(songTitle,playSongBox);
+        songItem.getChildren().addAll(songTitle, playSongBox);
         return songItem;
     }
 
@@ -87,7 +95,6 @@ public class SongListBoxIsrael {
         onStyle(btn);
         return btn;
     }
-
 
     public void onStyle(Button btn){
         btn.setStyle("-fx-background-color: #283E23;-fx-font-size: 8px;-fx-text-fill: white;");

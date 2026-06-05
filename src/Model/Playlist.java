@@ -1,5 +1,12 @@
 package Model;
 
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.util.Arrays;
+
 public class Playlist {
 
     SongNode head;
@@ -7,6 +14,46 @@ public class Playlist {
     SongNode current;
 
     private int size = 0;
+
+    public void addSongFromFile(File sourceFile) {
+        try {
+            // Pastikan folder music ada
+            File musicFolder = new File("music");
+            if (!musicFolder.exists()) {
+                musicFolder.mkdirs();
+            }
+
+            Path source = sourceFile.toPath();
+            Path destination = Paths.get("music", sourceFile.getName());
+
+            Files.copy(source, destination, StandardCopyOption.REPLACE_EXISTING);
+
+            addSong(destination.toString());
+
+            System.out.println("Berhasil menambahkan: " + sourceFile.getName());
+
+        } catch (Exception e) {
+            System.out.println("Gagal menambahkan lagu: " + e.getMessage());
+        }
+    }
+
+    public void addSongsFromFolder(String folderPath) {
+        File musicFolder = new File(folderPath);
+        File[] musicFiles = musicFolder.listFiles((dir, name) ->
+                name.toLowerCase().endsWith(".mp3") ||
+                        name.toLowerCase().endsWith(".wav") ||
+                        name.toLowerCase().endsWith(".aac")
+        );
+
+        if (musicFiles != null && musicFiles.length > 0) {
+            Arrays.sort(musicFiles);
+            for (File file : musicFiles) {
+                addSong(file.getPath());
+            }
+        } else {
+            System.out.println("Folder kosong atau tidak ditemukan: " + folderPath);
+        }
+    }
 
     // tambah lagu
     public void addSong(String path) {
@@ -67,13 +114,11 @@ public class Playlist {
 
     @Override
     public String toString() {
-
-        if(current == null) {
+        if (current == null) {
             return "No song";
         }
 
-        String filename = getCurrentSong()
-                .substring(getCurrentSong().lastIndexOf("/") + 1);
+        String filename = new File(getCurrentSong()).getName(); // handle / dan \ otomatis
 
         int dotIndex = filename.lastIndexOf('.');
 

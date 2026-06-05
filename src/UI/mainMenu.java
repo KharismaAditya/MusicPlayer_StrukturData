@@ -31,11 +31,7 @@ public class mainMenu extends Application {
 
     @Override
     public void start(Stage stage) {
-        playlist.addSong("music/Ai No Sukima.mp3");
-        playlist.addSong("music/No Title.mp3");
-        playlist.addSong("music/Utopia.mp3");
-        playlist.addSong("music/My Dearest.mp3");
-        playlist.addSong("music/UmaSugi!.mp3");
+        playlist.addSongsFromFolder("music");
         loadSong();
 
         volumeSlider.setPrefSize(100,50);
@@ -66,7 +62,7 @@ public class mainMenu extends Application {
         Interaction inReact = new Interaction(this,playlist,progressSlider,currentSongName, volumeSlider);
         HBox interactionBox = inReact.InteractionBox();
 
-        titleInfo tiInfo = new titleInfo(currentSongName,progressSlider,playlist);
+        titleInfo tiInfo = new titleInfo(currentSongName,progressSlider,playlist,songUI);
         VBox titleInfoBox = tiInfo.titleInfoBox();
 
         volumeBox volBox = new volumeBox(volumeSlider);

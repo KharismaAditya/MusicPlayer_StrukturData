@@ -1,5 +1,7 @@
 package Model;
 
+import java.io.File;
+
 public class SongNode {
     String songPath;
 
@@ -21,21 +23,11 @@ public class SongNode {
     @Override
     public String toString() {
 
-        if(songPath == null) {
+        if (songPath == null) {
             return "Unknown Song";
         }
 
-        String filename = songPath;
-
-        // Support Windows (\) dan Linux/Mac (/)
-        int slashIndex = Math.max(
-                filename.lastIndexOf('/'),
-                filename.lastIndexOf('\\')
-        );
-
-        if(slashIndex != -1) {
-            filename = filename.substring(slashIndex + 1);
-        }
+        String filename = new File(songPath).getName(); // otomatis ambil nama file saja
 
         int dotIndex = filename.lastIndexOf('.');
 
