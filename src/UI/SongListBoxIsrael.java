@@ -51,7 +51,7 @@ public class SongListBoxIsrael {
 
     public HBox songItem(Playlist playlist, SongNode node){
         HBox songItem = new HBox();
-        songItem.setMinSize(125,30);
+        songItem.setPrefSize(125,30);
 
         VBox songTitle = new VBox();
         Label songTitleLabel = new Label(node.toString());
