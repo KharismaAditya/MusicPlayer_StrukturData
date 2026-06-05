@@ -25,7 +25,7 @@ public class titleInfo {
 
     public VBox titleInfoBox() {
         VBox titleInfoBox = new VBox();
-        titleInfoBox.setStyle("-fx-background-color: #A4D8BF;");
+        titleInfoBox.setStyle("-fx-background-color: #DCCCAC;");
         titleInfoBox.setMinSize(170,60);titleInfoBox.setAlignment(Pos.CENTER);
         titleInfoBox.setSpacing(10);
         String songRn = playlist.toString();

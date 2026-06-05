@@ -51,7 +51,7 @@ public class mainMenu extends Application {
         });
 
         VBox root = new VBox();
-        root.setStyle("-fx-background-color: #40555B;");
+        root.setStyle("-fx-background-color: #486953;");
         root.setMinSize(550,300); root.setAlignment(Pos.BOTTOM_CENTER);
 
         GridPane grid = songUI.songList();

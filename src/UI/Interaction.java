@@ -94,7 +94,7 @@ public class Interaction  {
                 });
 
         HBox interactionBox = new HBox();
-        interactionBox.setStyle("-fx-background-color: #989898;");
+        interactionBox.setStyle("-fx-background-color: #99AD7A;");
         interactionBox.setMinSize(250,60);interactionBox.setAlignment(Pos.CENTER);
         interactionBox.setSpacing(12);
         interactionBox.getChildren().addAll(prevBtn,playBtn,pauseBtn,nextBtn);

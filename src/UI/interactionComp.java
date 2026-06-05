@@ -19,8 +19,8 @@ public class interactionComp {
 
 
     public void onStyle(Button btn){
-        btn.setStyle("-fx-background-color: #FF3636;-fx-font-size: 8px;");
-        btn.setOnMouseEntered(e -> btn.setStyle("-fx-background-color: #842323; -fx-font-size: 8px;"));
-        btn.setOnMouseExited(e -> btn.setStyle("-fx-background-color: #FF3636;-fx-font-size: 8px;"));
+        btn.setStyle("-fx-background-color: #546B41;-fx-font-size: 8px;");
+        btn.setOnMouseEntered(e -> btn.setStyle("-fx-background-color: #3D532B; -fx-font-size: 8px;"));
+        btn.setOnMouseExited(e -> btn.setStyle("-fx-background-color: #546B41;-fx-font-size: 8px;"));
     }
 }
