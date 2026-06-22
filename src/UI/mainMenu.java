@@ -53,8 +53,8 @@ public class mainMenu extends Application {
         VBox root = new VBox();
         root.setStyle("-fx-background-color: #486953;");
         root.setMinSize(550,300); root.setAlignment(Pos.BOTTOM_CENTER);
-
-        GridPane grid = songUI.songList();
+        VBox list = songUI.songList();
+        root.getChildren().add(list); // Or layout.setCenter(list); depending on your layout root pane type
 
         HBox musicInfoBox = new HBox();
         musicInfoBox.setMinSize(550,60);
@@ -69,7 +69,7 @@ public class mainMenu extends Application {
         VBox volumeBox = volBox.volumeBoxInt();
 
         musicInfoBox.getChildren().addAll(interactionBox,titleInfoBox,volumeBox);
-        root.getChildren().addAll(grid,musicInfoBox);
+        root.getChildren().addAll(musicInfoBox);
 
         root.getStylesheets().add(
                 getClass().getResource("/styles.css").toExternalForm()

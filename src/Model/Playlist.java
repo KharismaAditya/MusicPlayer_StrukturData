@@ -76,6 +76,36 @@ public class Playlist {
         size++;
     }
 
+    public void deleteNode(SongNode targetNode) {
+        if (targetNode == null || head == null) return;
+
+        // If it's the current song, try to slide pointer down the list first
+        if (current == targetNode) {
+            nextSong();
+            if (current == targetNode) current = null; // List had only 1 track
+        }
+
+        // Step 1: Change left neighbor links
+        if (targetNode == head) {
+            head = targetNode.next;
+        } else {
+            targetNode.prev.next = targetNode.next;
+        }
+
+        // Step 2: Change right neighbor links
+        if (targetNode == tail) {
+            tail = targetNode.prev;
+        } else {
+            targetNode.next.prev = targetNode.prev;
+        }
+
+        // Step 3: Sever references entirely for garbage collection isolation
+        targetNode.next = null;
+        targetNode.prev = null;
+
+        size--;
+    }
+
     public int size() {
         return size;
     }
