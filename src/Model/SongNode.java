@@ -7,6 +7,7 @@ public class SongNode {
 
     SongNode next;
     SongNode prev;
+    private boolean isFavorite = false;
 
     public SongNode(String songPath) {
         this.songPath = songPath;
@@ -19,6 +20,10 @@ public class SongNode {
     public SongNode getNext() {
         return next;
     }
+
+    public boolean isFavorite() { return isFavorite; }
+
+    public void setFavorite(boolean favorite) { this.isFavorite = favorite; }
 
     @Override
     public String toString() {
