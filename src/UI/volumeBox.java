@@ -19,7 +19,8 @@ public class volumeBox {
         VBox volumeBox1 = new VBox();
         volumeBox1.setPadding(new Insets(10));
         volumeBox1.setStyle("-fx-background-color: #FFF8EC;");
-        volumeBox1.setMinSize(130,60);volumeBox1.setAlignment(Pos.CENTER);
+        volumeBox1.setMinSize(200,60);volumeBox1.setAlignment(Pos.CENTER);
+
         volumeBox1.getChildren().addAll(volumeLabel,volumeSlider);
 
         return volumeBox1;

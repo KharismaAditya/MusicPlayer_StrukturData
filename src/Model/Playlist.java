@@ -79,6 +79,8 @@ public class Playlist {
     public void deleteNode(SongNode targetNode) {
         if (targetNode == null || head == null) return;
 
+        deleteSongFile(targetNode.songPath);
+
         // If it's the current song, try to slide pointer down the list first
         if (current == targetNode) {
             nextSong();
@@ -104,6 +106,22 @@ public class Playlist {
         targetNode.prev = null;
 
         size--;
+    }
+
+    private void deleteSongFile(String path) {
+        try {
+            File file = new File(path);
+            if (file.exists()) {
+                boolean deleted = file.delete();
+                if (deleted) {
+                    System.out.println("File terhapus: " + path);
+                } else {
+                    System.out.println("Gagal menghapus file: " + path);
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Error saat menghapus file: " + e.getMessage());
+        }
     }
 
     public int size() {
